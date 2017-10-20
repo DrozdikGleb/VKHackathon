@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/what_route"
+        android:icon="@drawable/ic_what_route"
+        android:title="@string/whatroute"
+        />
+
+    <item
+        android:id="@+id/ic_want_to_visit"
+        android:icon="@drawable/ic_want_to_visit"
+        android:title="@string/want_to_visit"
+        />
+
+</menu>
