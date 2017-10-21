@@ -1,6 +1,7 @@
 package com.glebdrozdov.vkhackathon;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -59,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
                         item.setChecked(true);
                         break;
                     case R.id.ic_want_to_visit:
+                        Intent mainToRouteActivity = new Intent(MainActivity.this,RouteActivity.class);
+                        startActivity(mainToRouteActivity);
                         item.setChecked(true);
                         break;
 
