@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import com.github.chrisbanes.photoview.PhotoView;
 
-
 public class SecondFloorFragment extends Fragment {
     @Nullable
     @Override

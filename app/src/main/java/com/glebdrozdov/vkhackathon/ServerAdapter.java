@@ -14,13 +14,10 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-/**
- * Created by apple on 21.10.17.
- */
+import static com.glebdrozdov.vkhackathon.Consts.ROOMS_COUNT;
 
 public class ServerAdapter {
 
-    private static final int ROOMS_COUNT = 400;
     private static String myJSON;
     private int times[] = new int[ROOMS_COUNT + 1];
     private int people[] = new int[ROOMS_COUNT + 1];
