@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
 
     private FloorsPageAdapter floorsPageAdapter;
     TextView tv;
-    static Dialog d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
