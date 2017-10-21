@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         final Dialog d = new Dialog(MainActivity.this);
         d.setTitle("NumberPicker");
         d.setContentView(R.layout.dialog);
-        d.getWindow().setLayout((6 * width) / 7, (4 * height) / 5);
+        d.getWindow().setLayout((5 * width) / 7, (3 * height) / 5);
         final NumberPicker np1 = (NumberPicker) d.findViewById(R.id.numberPicker1);
         final NumberPicker np2 = (NumberPicker) d.findViewById(R.id.numberPicker2);
         final NumberPicker np3 = (NumberPicker) d.findViewById(R.id.numberPicker3);

@@ -29,6 +29,7 @@ public class FirstFloorFragment extends Fragment {
     private float xLocation;
     private float yLocation;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,17 +46,14 @@ public class FirstFloorFragment extends Fragment {
                 .copy(Bitmap.Config.ARGB_8888, true);
         Bitmap newBitmap = getOurRoute(myBitmap);
         photoView.setImageBitmap(newBitmap);
+        photoView.setScale(2.5f,true);
         final TextView textView = (TextView) view.findViewById(R.id.our_data);
-        photoView.setOnScaleChangeListener(new OnScaleChangedListener() {
-            @Override
-            public void onScaleChange(float scaleFactor, float focusX, float focusY) {
-                textView.setText(String.valueOf(scaleFactor) + " " + String.valueOf(focusX) + " " + String.valueOf(focusY));
-            }
-        });
         photoView.setOnPhotoTapListener(new OnPhotoTapListener() {
             @Override
             public void onPhotoTap(ImageView view, float x, float y) {
-                textView.setText(String.valueOf(x) + " " + String.valueOf(y));
+                xLocation = x;
+                yLocation = y;
+                textView.setText(String.valueOf(xLocation) + " " + String.valueOf(yLocation));
             }
         });
 
