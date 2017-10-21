@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
     int times[] = new int[ROOMS_COUNT + 1];
     int people[] = new int[ROOMS_COUNT + 1];
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,17 +91,43 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         d.setTitle("NumberPicker");
         d.setContentView(R.layout.dialog);
         d.getWindow().setLayout((6 * width) / 7, (4 * height) / 5);
+        final NumberPicker np1 = (NumberPicker) d.findViewById(R.id.numberPicker1);
+        final NumberPicker np2 = (NumberPicker) d.findViewById(R.id.numberPicker2);
+        final NumberPicker np3 = (NumberPicker) d.findViewById(R.id.numberPicker3);
         Button b1 = (Button) d.findViewById(R.id.button1);
         Button b2 = (Button) d.findViewById(R.id.button2);
-        final NumberPicker np = (NumberPicker) d.findViewById(R.id.numberPicker1);
-        np.setMaxValue(ROOMS_COUNT);
-        np.setMinValue(0);
-        np.setWrapSelectorWheel(false);
-        np.setOnValueChangedListener(this);
+        np1.setMaxValue(4);
+        np1.setMinValue(0);
+        np1.setWrapSelectorWheel(false);
+        np1.setOnValueChangedListener(this);
+        np1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                if(i1==4){
+                    np2.setValue(0);
+                    np2.setEnabled(false);
+                    np3.setValue(0);
+                    np3.setEnabled(false);
+                }
+                else{
+                    np2.setEnabled(true);
+                    np3.setEnabled(true);
+                }
+            }
+        });
+        np2.setMaxValue(9);
+        np2.setMinValue(0);
+        np2.setWrapSelectorWheel(false);
+        np2.setOnValueChangedListener(this);
+        np3.setMaxValue(9);
+        np3.setMinValue(0);
+        np3.setWrapSelectorWheel(false);
+        np3.setOnValueChangedListener(this);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv.setText(String.valueOf(np.getValue()));
+                String room = String.valueOf(np1.getValue())+String.valueOf(np2.getValue())+String.valueOf(np3.getValue());
+                tv.setText(room);
                 d.dismiss();
             }
         });
@@ -113,10 +140,6 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         d.show();
     }
 
-    @Override
-    public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-
-    }
 
     private void getData() {
         class dataTask extends AsyncTask<String, Void, String> {
@@ -181,5 +204,10 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+
     }
 }
