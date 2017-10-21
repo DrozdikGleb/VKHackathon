@@ -30,7 +30,7 @@ public class RoomsActivity extends Activity {
     final HashMap<String, List<Integer>> hm = new HashMap<>();
     final HashMap<Integer, String> antiHm = new HashMap<>();
     final String[] catNames = new String[400];
-    boolean[] toVisit = new boolean[400];
+    //boolean[] toVisit = new boolean[400];
     Button btn;
     int j = 0;
 
@@ -186,16 +186,14 @@ public class RoomsActivity extends Activity {
                 check.setChecked(click);
                 if (click) {
                     int number = Integer.parseInt(catNames[position].substring(catNames[position].lastIndexOf(' ') + 1));
-                    //int number = 3;
                     Log.i("qqq", String.valueOf(number));
                     Log.i("qqq", catNames[number]);
-                    toVisit[number] = true;
+                    toVisit[number - 1] = true;
                 } else {
                     int number = Integer.parseInt(catNames[position].substring(catNames[position].lastIndexOf(' ') + 1));
-                    //int number = 3;
                     Log.i("qqq", String.valueOf(number));
                     Log.i("qqq", catNames[number]);
-                    toVisit[number] = false;
+                    toVisit[number - 1] = false;
                 }
             }
         });
@@ -227,24 +225,21 @@ public class RoomsActivity extends Activity {
                 for(int i = 0; i < toVisit.length; i++){
                     s += toVisit[i] + " ";
                 }
-                Toast.makeText(RoomsActivity.this, s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(RoomsActivity.this, route, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     void bar() {
-        for(HashMap.Entry<String, List<Integer>> entry : hm.entrySet()) {
+        for (HashMap.Entry<String, List<Integer>> entry : hm.entrySet()) {
             String key = entry.getKey();
             List value = entry.getValue();
-            for(int i = 0; i < value.size(); i++){
+            for (int i = 0; i < value.size(); i++) {
                 catNames[j] = key + " " + String.valueOf(value.get(i));
                 j++;
             }
-    void bar() {
-        for (int i = 0; i < 400; i++) {
-            roomNumbers[i] = String.valueOf(i + 1);
         }
-        for(int i = j; i < 400; i++){
+        for (int i = j; i < 400; i++) {
             catNames[i] = "Античный мир 109";
         }
     }
