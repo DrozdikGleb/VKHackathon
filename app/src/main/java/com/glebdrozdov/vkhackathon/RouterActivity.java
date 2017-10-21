@@ -6,18 +6,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class RouterActivity extends Activity{
+public class RouterActivity extends Activity {
     Button button, button3, button4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_router);
-        button = (Button)findViewById(R.id.button);
-        button3 = (Button)findViewById(R.id.button3);
-        button4 = (Button)findViewById(R.id.button4);
+        button = (Button) findViewById(R.id.button);
+        button3 = (Button) findViewById(R.id.button3);
+        button4 = (Button) findViewById(R.id.button4);
     }
-    public void onClick(View v){
-        switch(v.getId()){
+
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.button:
                 Intent intent = new Intent(RouterActivity.this, MainActivity.class);
                 startActivity(intent);

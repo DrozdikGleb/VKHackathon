@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class FloorsPageAdapter extends FragmentPagerAdapter {
 
     public final List<Fragment> fragmentList = new ArrayList<>();
