@@ -2,6 +2,7 @@ package com.glebdrozdov.vkhackathon;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -40,10 +41,10 @@ public class RoomsActivity extends Activity {
     static final int TRANSFER_RATE = CONST;// TODO: change later
     static final int MAX_TIME = (int) (24 * 60 * 60 * 1000 - Calendar.getInstance().getTimeInMillis());
     // from database
-    static final int[] TIME = new int[ROOMS_COUNT];
     static final int[][] PROBABILITY = new int[ROOMS_COUNT][ROOMS_COUNT];
-    static final int[] PEOPLE_NOW = new int[ROOMS_COUNT];
-    static final int[] RATING = new int[ROOMS_COUNT];
+    static int[] TIME = new int[ROOMS_COUNT];
+    static int[] PEOPLE_NOW = new int[ROOMS_COUNT];
+    static int[] RATING = new int[ROOMS_COUNT];
 
     // from somewhere (probably database)
     static ArrayList<Integer>[] matrix = new ArrayList[ROOMS_COUNT];
@@ -184,6 +185,14 @@ public class RoomsActivity extends Activity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ServerAdapter serverAdapter = new ServerAdapter();
+                serverAdapter.getData();
+                TIME = serverAdapter.getTimes();
+                PEOPLE_NOW = serverAdapter.getPeopleAtThisMoment();
+                RATING = serverAdapter.getRatings();
+
+                Log.i("people-",String.valueOf(PEOPLE_NOW[0]));
+
                 String route = "";
                 fillPeopleMatrix();
                 for (int i = 0; i < ROOMS_COUNT; i++) {

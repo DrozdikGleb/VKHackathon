@@ -20,7 +20,8 @@ public class ServerAdapter {
 
     private static String myJSON;
     private int times[] = new int[ROOMS_COUNT + 1];
-    private int people[] = new int[ROOMS_COUNT + 1];
+    private int peopleAtThisMoment[] = new int[ROOMS_COUNT + 1];
+    private int ratings[] = new int[ROOMS_COUNT + 1];
 
     public void getData() {
         class dataTask extends AsyncTask<String, Void, String> {
@@ -74,12 +75,13 @@ public class ServerAdapter {
                 JSONObject jsonObj = new JSONObject(myJSON.substring(myJSON.indexOf("{"), myJSON.lastIndexOf("}") + 1));
                 JSONArray p = jsonObj.getJSONArray("rooms");
                 for (int i = 0; i < p.length(); i++) {
-                    JSONObject c = p.getJSONObject(i);
-                    String time = c.getString("time");
-                    String n = c.getString("people");
+                    JSONObject jsonObject = p.getJSONObject(i);
+                    String time = jsonObject.getString("time");
+                    String people = jsonObject.getString("people");
+                    String rating = jsonObject.getString("rating");
                     times[i] = Integer.parseInt(time);
-                    people[i] = Integer.parseInt(n);
-
+                    peopleAtThisMoment[i] = Integer.parseInt(people);
+                    ratings[i] = Integer.parseInt(rating);
                 }
             }
         } catch (JSONException e) {
@@ -87,7 +89,15 @@ public class ServerAdapter {
         }
     }
 
-    public int[] getPeople() {
-        return people;
+    public int[] getPeopleAtThisMoment() {
+        return peopleAtThisMoment;
+    }
+
+    public int[] getTimes() {
+        return times;
+    }
+
+    public int[] getRatings() {
+        return ratings;
     }
 }
