@@ -49,4 +49,12 @@
         android:layout_alignBottom="@+id/button2"
         android:layout_alignStart="@+id/numberPicker1" />
 
+    <Button
+        android:id="@+id/buttonWayToExit"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:drawableEnd= "@drawable/ic_exitroute"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/numberPicker3" />
+
 </RelativeLayout>
