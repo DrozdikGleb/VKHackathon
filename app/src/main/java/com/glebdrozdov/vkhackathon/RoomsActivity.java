@@ -136,7 +136,7 @@ public class RoomsActivity extends Activity {
         }
     }
 
-    static final int CONST = 777;
+    static final int CONST = 1;
     static final int PEOPLE_WEIGHT_RATE = CONST;
     static final int WAS_VISITED_RATE = CONST;
     static final int TRANSFER_RATE = CONST; // TODO: change later
@@ -158,10 +158,14 @@ public class RoomsActivity extends Activity {
     static int currentRoom = 0;
 
     private static void fillPeopleMatrix() {
+        for (int i = 0; i < ROOMS_COUNT + 1; i++) {
+            people[i][0] = PEOPLE_NOW[i];
+        }
         for (int time = 0; time < MAX_TIME - 1; time++) {
             for (int i = 0; i < ROOMS_COUNT + 1; i++) {
                 for (int j = 0; j < ROOMS_COUNT + 1; j++) {
-                    people[i][time + 1] += people[j][time] * PROBABILITY[j][i];
+//                    people[i][time + 1] += people[j][time] * PROBABILITY[j][i];
+                    people[i][time + 1] = CONST;
                 }
             }
         }
@@ -237,7 +241,7 @@ public class RoomsActivity extends Activity {
             transferList.add(currentVertice);
             currentVertice = distancesWithTimes[currentVertice].parent;
         }
-        for (int i = 0; i < transferList.size(); i++) {
+        for (int i = 1; i < transferList.size(); i++) {
             order.add(transferList.get(transferList.size() - i - 1));
             currentTime += TIME[transferList.get(transferList.size() - i - 1)];
         }
@@ -292,11 +296,16 @@ public class RoomsActivity extends Activity {
 
                 String route = "";
                 fillPeopleMatrix();
-                for (int i = 0; i < ROOMS_COUNT; i++) {
+                for (int i = 0; i < ROOMS_COUNT + 1; i++) {
                     wasVisited[i] = false;
                 }
-                getDistances(new ArrayList<Integer>(), currentRoom);
-                order.add(CONST);
+                ArrayList<Integer> toVisit = new ArrayList<>();
+                toVisit.add(11);
+                toVisit.add(12);
+                toVisit.add(13);
+                toVisit.add(14);
+                order.add(currentRoom);
+                getDistances(toVisit, currentRoom);
                 route += order.get(0);
                 for (int i = 1; i < order.size(); i++) {
                     route += String.format(" -> %d", order.get(i));

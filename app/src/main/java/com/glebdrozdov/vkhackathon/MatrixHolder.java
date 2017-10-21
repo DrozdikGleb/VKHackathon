@@ -12,7 +12,7 @@ import static com.glebdrozdov.vkhackathon.Consts.ROOMS_COUNT;
 
 public class MatrixHolder {
 
-    List<Integer>[] matrix = new List[ROOMS_COUNT];
+    List<Integer>[] matrix = new List[ROOMS_COUNT + 1];
 
     public void fillInMatrix() {
         matrix[0] = Arrays.asList(11, 26, 89, 100, 192, 193);
