@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
                         item.setChecked(true);
                         break;
                     case R.id.ic_want_to_visit:
-                        Intent mainToRouteActivity = new Intent(MainActivity.this, RouteActivity.class);
+                        Intent mainToRouteActivity = new Intent(MainActivity.this,RouterActivity.class);
                         startActivity(mainToRouteActivity);
                         item.setChecked(true);
                         break;
@@ -68,11 +69,6 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
                 return false;
             }
         });
-        ServerAdapter sa = new ServerAdapter();
-        sa.getData();
-        for (int i = 0; i < sa.getPeople().length; i++) {
-            Log.i("people", String.valueOf(sa.getPeople()[i]));
-        }
     }
 
     private void setupViewPager(ViewPager viewPager) {
