@@ -148,7 +148,7 @@ public class RoomsActivity extends Activity {
     static int[] RATING = new int[ROOMS_COUNT + 1];
 
     // from somewhere (probably database) // TODO: get this from somewhere
-    static ArrayList<Integer>[] matrix = new ArrayList[ROOMS_COUNT];
+    static List<Integer>[] matrix;
 
     static int[][] people = new int[ROOMS_COUNT + 1][MAX_TIME];
     static int currentTime = 0;
@@ -286,7 +286,7 @@ public class RoomsActivity extends Activity {
                 PEOPLE_NOW = getPeopleAtThisMoment();
                 RATING = getRatings();
                 PROBABILITY = getProbability();
-//                matrix = getFromTxt();
+                matrix = getMatrixFromTxt();
 
                 Log.i("people-", String.valueOf(PEOPLE_NOW[0]));
 
@@ -360,5 +360,11 @@ public class RoomsActivity extends Activity {
             }
         }
         return probability;
+    }
+
+    private List<Integer>[] getMatrixFromTxt() {
+        MatrixHolder matrixHolder = new MatrixHolder();
+        matrixHolder.fillInMatrix();
+        return matrixHolder.matrix;
     }
 }
