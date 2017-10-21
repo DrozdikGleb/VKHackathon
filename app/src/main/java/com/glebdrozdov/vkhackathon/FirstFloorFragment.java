@@ -1,9 +1,11 @@
 package com.glebdrozdov.vkhackathon;
 
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,7 +22,18 @@ public class FirstFloorFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        PhotoView photoView = (PhotoView) view.findViewById(R.id.first_floor_photo_view);
+        PhotoView photoView =(PhotoView) view.findViewById(R.id.first_floor_photo_view);
+        /*Matrix inverse = new Matrix();
+        photoView.getImageMatrix().invert(inverse);
+        float[] touchPoint = new float[1000];
+        photoView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                float[] touchPoint = new float[] {event.getX(), event.getY()};
+                return true;
+            }
+        });
+        inverse.mapPoints(touchPoint);*/
         photoView.setImageResource(R.drawable.map_hermitage_1);
     }
 }
