@@ -41,7 +41,7 @@ public class FirstFloorFragment extends Fragment {
         PhotoView photoView = (PhotoView) view.findViewById(R.id.first_floor_photo_view);
         photoView.setImageResource(R.drawable.map_hermitage_1);
         photoView.buildDrawingCache();
-        Bitmap myBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.map_hermitage_1)
+        Bitmap myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.map_hermitage_1)
                 .copy(Bitmap.Config.ARGB_8888, true);
         Bitmap newBitmap = getOurRoute(myBitmap);
         photoView.setImageBitmap(newBitmap);
@@ -49,25 +49,26 @@ public class FirstFloorFragment extends Fragment {
         photoView.setOnScaleChangeListener(new OnScaleChangedListener() {
             @Override
             public void onScaleChange(float scaleFactor, float focusX, float focusY) {
-                textView.setText(String.valueOf(scaleFactor)+" "+String.valueOf(focusX)+" "+String.valueOf(focusY));
+                textView.setText(String.valueOf(scaleFactor) + " " + String.valueOf(focusX) + " " + String.valueOf(focusY));
             }
         });
         photoView.setOnPhotoTapListener(new OnPhotoTapListener() {
             @Override
             public void onPhotoTap(ImageView view, float x, float y) {
-                textView.setText(String.valueOf(x)+" "+String.valueOf(y));
+                textView.setText(String.valueOf(x) + " " + String.valueOf(y));
             }
         });
 
     }
-    public Bitmap getOurRoute(Bitmap previousBitmap){
+
+    public Bitmap getOurRoute(Bitmap previousBitmap) {
         Canvas canvas = new Canvas(previousBitmap);
         float heightBitmap = previousBitmap.getHeight();
         float widthBitmap = previousBitmap.getWidth();
         Paint paint = new Paint();
         paint.setColor(Color.RED);
         paint.setStrokeWidth(6);
-        canvas.drawLine(widthBitmap*0.435f,heightBitmap*0.52f,widthBitmap*0.5f,heightBitmap*0.52f,paint);
+        canvas.drawLine(widthBitmap * 0.435f, heightBitmap * 0.52f, widthBitmap * 0.5f, heightBitmap * 0.52f, paint);
         return previousBitmap;
     }
 }
