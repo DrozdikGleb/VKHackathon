@@ -19,6 +19,7 @@
         <activity android:name=".RouterActivity"></activity>
         <activity android:name=".RoomsActivity"></activity>
         <activity android:name=".CategoryActivity"></activity>
+        <activity android:name=".ListRooms"></activity>
     </application>
 
 </manifest>
