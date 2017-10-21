@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -168,10 +169,9 @@ public class RoomsActivity extends Activity {
         setContentView(R.layout.activity_rooms);
         ListView listView = (ListView) findViewById(R.id.listView);
         btn = (Button) findViewById(R.id.btn);
-// определяем массив типа String
 
-        bar();
         fillMap();
+        bar();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_multiple_choice, roomNumbers);
 
@@ -185,9 +185,17 @@ public class RoomsActivity extends Activity {
                 boolean click = !check.isChecked();
                 check.setChecked(click);
                 if (click) {
-                    toVisit[position] = true;
+                    int number = Integer.parseInt(catNames[position].substring(catNames[position].lastIndexOf(' ') + 1));
+                    //int number = 3;
+                    Log.i("qqq", String.valueOf(number));
+                    Log.i("qqq", catNames[number]);
+                    toVisit[number] = true;
                 } else {
-                    toVisit[position] = false;
+                    int number = Integer.parseInt(catNames[position].substring(catNames[position].lastIndexOf(' ') + 1));
+                    //int number = 3;
+                    Log.i("qqq", String.valueOf(number));
+                    Log.i("qqq", catNames[number]);
+                    toVisit[number] = false;
                 }
             }
         });
@@ -215,6 +223,11 @@ public class RoomsActivity extends Activity {
 
                 // order - лист очередности посещения
                 // route - чистая строка очередности посещения
+                String s = "";
+                for(int i = 0; i < toVisit.length; i++){
+                    s += toVisit[i] + " ";
+                }
+                Toast.makeText(RoomsActivity.this, s, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -230,6 +243,9 @@ public class RoomsActivity extends Activity {
     void bar() {
         for (int i = 0; i < 400; i++) {
             roomNumbers[i] = String.valueOf(i + 1);
+        }
+        for(int i = j; i < 400; i++){
+            catNames[i] = "Античный мир 109";
         }
     }
 
