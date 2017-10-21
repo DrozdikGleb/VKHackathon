@@ -292,25 +292,24 @@ public class RoomsActivity extends Activity {
                 PROBABILITY = getProbability();
                 matrix = getMatrixFromTxt();
 
-                Log.i("people-", String.valueOf(PEOPLE_NOW[0]));
-
                 String route = "";
                 fillPeopleMatrix();
                 for (int i = 0; i < ROOMS_COUNT + 1; i++) {
                     wasVisited[i] = false;
                 }
-                ArrayList<Integer> toVisit = new ArrayList<>();
-                toVisit.add(11);
-                toVisit.add(12);
-                toVisit.add(13);
-                toVisit.add(14);
+                ArrayList<Integer> toVisitList = new ArrayList<>();
+                for (int i = 0; i < ROOMS_COUNT; i++) {
+                    if (toVisit[i]) {
+                        toVisitList.add(i + 1);
+                    }
+                }
                 order.add(currentRoom);
-                getDistances(toVisit, currentRoom);
+                getDistances(toVisitList, currentRoom);
                 route += order.get(0);
                 for (int i = 1; i < order.size(); i++) {
                     route += String.format(" -> %d", order.get(i));
                 }
-                Log.i("people-", route);
+                order = new ArrayList<>();
                 // order - лист очередности посещения
                 // route - чистая строка очередности посещения
             }
@@ -336,7 +335,7 @@ public class RoomsActivity extends Activity {
         hm.put("Древности Сибири", Arrays.asList(26, 28, 29, 30, 31, 32));
         hm.put("Средняя Азия", Arrays.asList(38, 39, 40, 46, 47, 48, 49, 50, 51, 52, 53, 54));
         hm.put("Античный мир", Arrays.asList(101, 102, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 121, 127, 128, 129, 130, 131));
-        hm.put("Кавказ", Arrays.asList(55, 56, 57, 58, 59, 60, 61, 62, 63));
+        hm.put("Кавказ", Arrays.asList(55, 56, 57, 58, 59, 60, 61, 62, 63, 68, 69));
         hm.put("Древний Египет", Arrays.asList(100));
         hm.put("Древнейшие памятники Евразии", Arrays.asList(11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 27, 33));
         hm.put("Древний Восток", Arrays.asList(89, 90));
