@@ -11,28 +11,21 @@ import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import static com.glebdrozdov.vkhackathon.Consts.ROOMS_COUNT;
 
 public class RoomsActivity extends Activity {
 
-    final String[] roomNumbers = new String[ROOMS_COUNT];
+    final String[] roomNames = new String[ROOMS_COUNT];
     boolean[] toVisit = new boolean[ROOMS_COUNT];
     final HashMap<String, List<Integer>> hm = new HashMap<>();
-    final HashMap<Integer, String> antiHm = new HashMap<>();
-    final String[] catNames = new String[400];
-    //boolean[] toVisit = new boolean[400];
-    Button btn;
-    int j = 0;
 
     static class DistanceAndTime {
         int distance;
@@ -168,12 +161,12 @@ public class RoomsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rooms);
         ListView listView = (ListView) findViewById(R.id.listView);
-        btn = (Button) findViewById(R.id.btn);
+        Button btn = (Button) findViewById(R.id.btn);
 
         fillMap();
         bar();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_multiple_choice, roomNumbers);
+                android.R.layout.simple_list_item_multiple_choice, roomNames);
 
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -185,14 +178,10 @@ public class RoomsActivity extends Activity {
                 boolean click = !check.isChecked();
                 check.setChecked(click);
                 if (click) {
-                    int number = Integer.parseInt(catNames[position].substring(catNames[position].lastIndexOf(' ') + 1));
-                    Log.i("qqq", String.valueOf(number));
-                    Log.i("qqq", catNames[number]);
+                    int number = Integer.parseInt(roomNames[position].substring(roomNames[position].lastIndexOf(' ') + 1));
                     toVisit[number - 1] = true;
                 } else {
-                    int number = Integer.parseInt(catNames[position].substring(catNames[position].lastIndexOf(' ') + 1));
-                    Log.i("qqq", String.valueOf(number));
-                    Log.i("qqq", catNames[number]);
+                    int number = Integer.parseInt(roomNames[position].substring(roomNames[position].lastIndexOf(' ') + 1));
                     toVisit[number - 1] = false;
                 }
             }
@@ -206,7 +195,7 @@ public class RoomsActivity extends Activity {
                 PEOPLE_NOW = serverAdapter.getPeopleAtThisMoment();
                 RATING = serverAdapter.getRatings();
 
-                Log.i("people-",String.valueOf(PEOPLE_NOW[0]));
+                Log.i("people-", String.valueOf(PEOPLE_NOW[0]));
 
                 String route = "";
                 fillPeopleMatrix();
@@ -214,6 +203,7 @@ public class RoomsActivity extends Activity {
                     wasVisited[i] = false;
                 }
                 getDistances(new ArrayList<Integer>(), currentRoom);
+                order.add(CONST);
                 route += order.get(0);
                 for (int i = 1; i < order.size(); i++) {
                     route += String.format(" -> %d", order.get(i));
@@ -222,7 +212,7 @@ public class RoomsActivity extends Activity {
                 // order - лист очередности посещения
                 // route - чистая строка очередности посещения
                 String s = "";
-                for(int i = 0; i < toVisit.length; i++){
+                for (int i = 0; i < toVisit.length; i++) {
                     s += toVisit[i] + " ";
                 }
                 Toast.makeText(RoomsActivity.this, route, Toast.LENGTH_SHORT).show();
@@ -231,16 +221,17 @@ public class RoomsActivity extends Activity {
     }
 
     void bar() {
+        int j = 0;
         for (HashMap.Entry<String, List<Integer>> entry : hm.entrySet()) {
             String key = entry.getKey();
             List value = entry.getValue();
             for (int i = 0; i < value.size(); i++) {
-                catNames[j] = key + " " + String.valueOf(value.get(i));
+                roomNames[j] = key + " " + String.valueOf(value.get(i));
                 j++;
             }
         }
         for (int i = j; i < 400; i++) {
-            catNames[i] = "Античный мир 109";
+            roomNames[i] = "Античный мир 109";
         }
     }
 
