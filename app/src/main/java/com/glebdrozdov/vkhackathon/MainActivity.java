@@ -2,12 +2,12 @@ package com.glebdrozdov.vkhackathon;
 
 import android.app.Dialog;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,19 +29,20 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
 
+    static final int ROOMS_COUNT = 400;
     private FloorsPageAdapter floorsPageAdapter;
     TextView tv;
     static Dialog d;
     String myJSON;
-    int times[] = new int [401];
-    int people[] = new int [401];
+    int times[] = new int[ROOMS_COUNT + 1];
+    int people[] = new int[ROOMS_COUNT + 1];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         floorsPageAdapter = new FloorsPageAdapter(getSupportFragmentManager());
-        tv = (TextView)findViewById(R.id.roomNumber);
+        tv = (TextView) findViewById(R.id.roomNumber);
         ViewPager viewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(viewPager);
         TabLayout floorTabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -50,7 +51,8 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         floorTabLayout.getTabAt(1).setText("2Floor");
         floorTabLayout.getTabAt(2).setText("3Floor");
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView
+                .OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
@@ -84,11 +86,11 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         final Dialog d = new Dialog(MainActivity.this);
         d.setTitle("NumberPicker");
         d.setContentView(R.layout.dialog);
-        d.getWindow().setLayout((6 * width)/7, (4 * height)/5);
+        d.getWindow().setLayout((6 * width) / 7, (4 * height) / 5);
         Button b1 = (Button) d.findViewById(R.id.button1);
         Button b2 = (Button) d.findViewById(R.id.button2);
         final NumberPicker np = (NumberPicker) d.findViewById(R.id.numberPicker1);
-        np.setMaxValue(400);
+        np.setMaxValue(ROOMS_COUNT);
         np.setMinValue(0);
         np.setWrapSelectorWheel(false);
         np.setOnValueChangedListener(this);
@@ -152,15 +154,7 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
                 if (!s.trim().equals("{\"rooms\":[]}") && !s.trim().equals(null)) {
                     myJSON = s.trim();
                     parseList();
-                    //tv1.setText("Data");
-                } else {
-
                 }
-            }
-
-            @Override
-            protected void onCancelled() {
-
             }
         }
         dataTask DataTask = new dataTask();
@@ -172,7 +166,6 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
             if (myJSON.contains("{")) {
                 JSONObject jsonObj = new JSONObject(myJSON.substring(myJSON.indexOf("{"), myJSON.lastIndexOf("}") + 1));
                 JSONArray p = jsonObj.getJSONArray("rooms");
-                String s = "";
                 for (int i = 0; i < p.length(); i++) {
                     JSONObject c = p.getJSONObject(i);
                     String time = c.getString("time");
@@ -185,6 +178,5 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 }

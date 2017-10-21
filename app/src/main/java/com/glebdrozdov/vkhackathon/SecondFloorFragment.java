@@ -14,13 +14,13 @@ public class SecondFloorFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.second_floor,container,false);
+        View view = inflater.inflate(R.layout.second_floor, container, false);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        PhotoView photoView =(PhotoView) view.findViewById(R.id.second_floor_photo_view);
+        PhotoView photoView = (PhotoView) view.findViewById(R.id.second_floor_photo_view);
         photoView.setImageResource(R.drawable.map_hermitage_2);
     }
 }
