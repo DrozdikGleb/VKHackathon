@@ -141,7 +141,7 @@ public class RoomCoordinatesFiller {
         rooms[124] = new Room(0, 0, 0, 0);
         rooms[125] = new Room(0, 0, 0, 0);
         rooms[126] = new Room(0, 0, 0, 0);
-        rooms[127] = new Room(499,545, 155, 170);
+        rooms[127] = new Room(499, 545, 155, 170);
         rooms[128] = new Room(468, 499, 172, 190);
         rooms[129] = new Room(469, 499, 153, 172);
         rooms[130] = new Room(472, 506, 95, 155);

@@ -21,7 +21,7 @@ public class ThirdFloorFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         PhotoView photoView = (PhotoView) view.findViewById(R.id.third_floor_photo_view);
         photoView.setImageResource(R.drawable.map_hermitage_3);
-        photoView.setScale(2.5f,true);
+        photoView.setScale(2.5f, true);
     }
 
 }

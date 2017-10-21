@@ -19,8 +19,6 @@ import android.widget.Toast;
 import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
 
-import java.util.ArrayList;
-
 public class FirstFloorFragment extends Fragment {
 
     private float xLocation;
