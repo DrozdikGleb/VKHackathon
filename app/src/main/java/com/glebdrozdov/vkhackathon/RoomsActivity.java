@@ -19,7 +19,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -91,8 +90,7 @@ public class RoomsActivity extends Activity {
                 if (!s.trim().equals("{\"rooms\":[]}") && !s.trim().equals(null)) {
                     myJSON = s.trim();
                     parseList();
-                }
-                else{
+                } else {
                     Toast.makeText(RoomsActivity.this, "NO DATA", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -115,14 +113,12 @@ public class RoomsActivity extends Activity {
                     peopleAtThisMoment[i] = Integer.parseInt(people);
                     ratings[i] = Integer.parseInt(rating);
                 }
-            }
-            else{
+            } else {
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
 
     final String[] roomNames = new String[ROOMS_COUNT];
     boolean[] toVisit = new boolean[ROOMS_COUNT];
@@ -143,28 +139,28 @@ public class RoomsActivity extends Activity {
     static final int CONST = 777;
     static final int PEOPLE_WEIGHT_RATE = CONST;
     static final int WAS_VISITED_RATE = CONST;
-    static final int TRANSFER_RATE = CONST;// TODO: change later
-    static final int MAX_TIME = 99;//(int) (24 * 60 * 60 * 1000 - Calendar.getInstance().getTimeInMillis());
+    static final int TRANSFER_RATE = CONST; // TODO: change later
+    static final int MAX_TIME = 12 * 60;
     // from database
-    static final int[][] PROBABILITY = new int[ROOMS_COUNT][ROOMS_COUNT];
-    static int[] TIME = new int[ROOMS_COUNT];
-    static int[] PEOPLE_NOW = new int[ROOMS_COUNT];
-    static int[] RATING = new int[ROOMS_COUNT];
+    static int[][] PROBABILITY = new int[ROOMS_COUNT + 1][ROOMS_COUNT + 1]; // TODO: get this from somewhere
+    static int[] TIME = new int[ROOMS_COUNT + 1];
+    static int[] PEOPLE_NOW = new int[ROOMS_COUNT + 1];
+    static int[] RATING = new int[ROOMS_COUNT + 1];
 
-    // from somewhere (probably database)
+    // from somewhere (probably database) // TODO: get this from somewhere
     static ArrayList<Integer>[] matrix = new ArrayList[ROOMS_COUNT];
 
-    static int[][] people = new int[ROOMS_COUNT][MAX_TIME];
+    static int[][] people = new int[ROOMS_COUNT + 1][MAX_TIME];
     static int currentTime = 0;
-    static boolean[] wasVisited = new boolean[ROOMS_COUNT];
+    static boolean[] wasVisited = new boolean[ROOMS_COUNT + 1];
     static ArrayList<Integer> order = new ArrayList<>();
     // from geolocation
     static int currentRoom = 0;
 
     private static void fillPeopleMatrix() {
         for (int time = 0; time < MAX_TIME - 1; time++) {
-            for (int i = 0; i < ROOMS_COUNT; i++) {
-                for (int j = 0; j < ROOMS_COUNT; j++) {
+            for (int i = 0; i < ROOMS_COUNT + 1; i++) {
+                for (int j = 0; j < ROOMS_COUNT + 1; j++) {
                     people[i][time + 1] += people[j][time] * PROBABILITY[j][i];
                 }
             }
@@ -192,14 +188,14 @@ public class RoomsActivity extends Activity {
     }
 
     static void getDistances(ArrayList<Integer> toVisit, int startVertice) {
-        boolean[] needToVisit = new boolean[ROOMS_COUNT];
-        DistanceAndTime[] distancesWithTimes = new DistanceAndTime[ROOMS_COUNT];
+        boolean[] needToVisit = new boolean[ROOMS_COUNT + 1];
+        DistanceAndTime[] distancesWithTimes = new DistanceAndTime[ROOMS_COUNT + 1];
 
         for (int i = 0; i < toVisit.size(); i++) {
             needToVisit[toVisit.get(i)] = true;
         }
 
-        for (int i = 0; i < ROOMS_COUNT; i++) {
+        for (int i = 0; i < ROOMS_COUNT + 1; i++) {
             distancesWithTimes[i] = new DistanceAndTime(Integer.MAX_VALUE, currentTime);
         }
         distancesWithTimes[startVertice].distance = 0;
@@ -225,7 +221,7 @@ public class RoomsActivity extends Activity {
 
         int closestVertice = -1;
         int minimalDistance = Integer.MAX_VALUE;
-        for (int i = 0; i < ROOMS_COUNT; i++) {
+        for (int i = 0; i < ROOMS_COUNT + 1; i++) {
             if (needToVisit[i]) {
                 if (minimalDistance > distancesWithTimes[i].distance) {
                     minimalDistance = distancesWithTimes[i].distance;
@@ -246,11 +242,7 @@ public class RoomsActivity extends Activity {
             currentTime += TIME[transferList.get(transferList.size() - i - 1)];
         }
 
-        for (int i = 0; i < toVisit.size(); i++) {
-            if (toVisit.get(i) == closestVertice) {
-                toVisit.remove(i);
-            }
-        }
+        toVisit.remove(toVisit.lastIndexOf(closestVertice));
 
         if (toVisit.size() > 0) {
             getDistances(toVisit, closestVertice);
@@ -263,17 +255,14 @@ public class RoomsActivity extends Activity {
         setContentView(R.layout.activity_rooms);
         ListView listView = (ListView) findViewById(R.id.listView);
         Button btn = (Button) findViewById(R.id.btn);
-        Log.i("www", "1");
         getData();
         fillMap();
-        bar();
-        Log.i("www", "1");
+        fillRoomNames();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_multiple_choice, roomNames);
 
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        Log.i("www", "1");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -293,10 +282,11 @@ public class RoomsActivity extends Activity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 TIME = getTimes();
                 PEOPLE_NOW = getPeopleAtThisMoment();
                 RATING = getRatings();
+                PROBABILITY = getProbability();
+//                matrix = getFromTxt();
 
                 Log.i("people-", String.valueOf(PEOPLE_NOW[0]));
 
@@ -314,27 +304,22 @@ public class RoomsActivity extends Activity {
                 Log.i("people-", route);
                 // order - лист очередности посещения
                 // route - чистая строка очередности посещения
-                String s = "";
-                for (int i = 0; i < toVisit.length; i++) {
-                    s += toVisit[i] + " ";
-                }
-                //Toast.makeText(RoomsActivity.this, route, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    void bar() {
-        int j = 0;
+    void fillRoomNames() {
+        int index = 0;
         for (HashMap.Entry<String, List<Integer>> entry : hm.entrySet()) {
             String key = entry.getKey();
             List value = entry.getValue();
             for (int i = 0; i < value.size(); i++) {
-                roomNames[j] = key + " " + String.valueOf(value.get(i));
-                j++;
+                roomNames[index] = key + " " + String.valueOf(value.get(i));
+                index++;
             }
         }
-        for (int i = j; i < 400; i++) {
-            roomNames[i] = "Античный мир 109";
+        for (int i = index; i < ROOMS_COUNT; i++) {
+            roomNames[i] = "Несуществующий зал";
         }
     }
 
@@ -365,7 +350,15 @@ public class RoomsActivity extends Activity {
         hm.put("Византия и страны Востока", Arrays.asList(381, 382, 383, 384, 387, 388, 389, 390, 391, 392, 393, 394, 395, 396, 397));
         hm.put("Дальний Восток и Центральная Азия", Arrays.asList(351, 352, 353, 354, 355, 356, 357, 358, 376, 375, 368, 369, 370, 359, 360, 361, 362, 363, 364, 365, 366, 367));
         hm.put("Другое", Arrays.asList(398, 399, 400));
+    }
 
-
+    private int[][] getProbability() {
+        int[][] probability = new int[ROOMS_COUNT + 1][ROOMS_COUNT + 1];
+        for (int i = 0; i < ROOMS_COUNT + 1; i++) {
+            for (int j = 0; j < ROOMS_COUNT + 1; j++) {
+                probability[i][j] = 1;
+            }
+        }
+        return probability;
     }
 }
