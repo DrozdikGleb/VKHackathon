@@ -3,7 +3,6 @@ package com.glebdrozdov.vkhackathon;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,19 +34,19 @@ import static com.glebdrozdov.vkhackathon.Consts.ROOMS_COUNT;
 public class RoomsActivity extends Activity {
 
     private String myJSON;
-    private int times[] = new int[ROOMS_COUNT + 1];
-    private int peopleAtThisMoment[] = new int[ROOMS_COUNT + 1];
-    private int ratings[] = new int[ROOMS_COUNT + 1];
+    private static int times[] = new int[ROOMS_COUNT + 1];
+    private static int peopleAtThisMoment[] = new int[ROOMS_COUNT + 1];
+    private static int ratings[] = new int[ROOMS_COUNT + 1];
 
-    public int[] getPeopleAtThisMoment() {
+    public static int[] getPeopleAtThisMoment() {
         return peopleAtThisMoment;
     }
 
-    public int[] getTimes() {
+    public static int[] getTimes() {
         return times;
     }
 
-    public int[] getRatings() {
+    public static int[] getRatings() {
         return ratings;
     }
 
@@ -182,7 +181,6 @@ public class RoomsActivity extends Activity {
             tempDistance += WAS_VISITED_RATE;
         }
 
-        // нужно ли это?
         tempDistance += TRANSFER_RATE;
 
         // вычитаем из стоимости рейтинг зала, тк чем выше рейтинг тем больше мы туда хотим
@@ -286,34 +284,39 @@ public class RoomsActivity extends Activity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TIME = getTimes();
-                PEOPLE_NOW = getPeopleAtThisMoment();
-                RATING = getRatings();
-                PROBABILITY = getProbability();
-                matrix = getMatrixFromTxt();
-
-                String route = "";
-                fillPeopleMatrix();
-                for (int i = 0; i < ROOMS_COUNT + 1; i++) {
-                    wasVisited[i] = false;
-                }
-                ArrayList<Integer> toVisitList = new ArrayList<>();
-                for (int i = 0; i < ROOMS_COUNT; i++) {
-                    if (toVisit[i]) {
-                        toVisitList.add(i + 1);
-                    }
-                }
-                order.add(currentRoom);
-                getDistances(toVisitList, currentRoom);
-                route += order.get(0);
-                for (int i = 1; i < order.size(); i++) {
-                    route += String.format(" -> %d", order.get(i));
-                }
-                order = new ArrayList<>();
+                makeRoute(toVisit);
                 // order - лист очередности посещения
                 // route - чистая строка очередности посещения
             }
         });
+    }
+
+    public static String makeRoute(boolean[] toVisit) {
+        TIME = getTimes();
+        PEOPLE_NOW = getPeopleAtThisMoment();
+        RATING = getRatings();
+        PROBABILITY = getProbability();
+        matrix = getMatrixFromTxt();
+
+        String route = "";
+        fillPeopleMatrix();
+        for (int i = 0; i < ROOMS_COUNT + 1; i++) {
+            wasVisited[i] = false;
+        }
+        ArrayList<Integer> toVisitList = new ArrayList<>();
+        for (int i = 0; i < ROOMS_COUNT; i++) {
+            if (toVisit[i]) {
+                toVisitList.add(i + 1);
+            }
+        }
+        order.add(currentRoom);
+        getDistances(toVisitList, currentRoom);
+        route += order.get(0);
+        for (int i = 1; i < order.size(); i++) {
+            route += String.format(" %d", order.get(i));
+        }
+        order = new ArrayList<>();
+        return route;
     }
 
     void fillRoomNames() {
@@ -360,7 +363,7 @@ public class RoomsActivity extends Activity {
         hm.put("Другое", Arrays.asList(398, 399, 400));
     }
 
-    private int[][] getProbability() {
+    private static int[][] getProbability() {
         int[][] probability = new int[ROOMS_COUNT + 1][ROOMS_COUNT + 1];
         for (int i = 0; i < ROOMS_COUNT + 1; i++) {
             for (int j = 0; j < ROOMS_COUNT + 1; j++) {
@@ -370,7 +373,7 @@ public class RoomsActivity extends Activity {
         return probability;
     }
 
-    private List<Integer>[] getMatrixFromTxt() {
+    private static List<Integer>[] getMatrixFromTxt() {
         MatrixHolder matrixHolder = new MatrixHolder();
         matrixHolder.fillInMatrix();
         return matrixHolder.matrix;

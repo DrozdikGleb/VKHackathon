@@ -16,13 +16,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ListRooms extends AppCompatActivity {
+import static com.glebdrozdov.vkhackathon.Consts.ROOMS_COUNT;
 
+public class ListRooms extends AppCompatActivity {
 
     HashMap<String, List<Integer>> hm = new HashMap<>();
     Set<String> chosen = new HashSet<>();
     private Button btn;
-
 
     private void initMs() {
         hm.put("Древности Сибири", Arrays.asList(26, 28, 29, 30, 31, 32));
@@ -62,9 +62,7 @@ public class ListRooms extends AppCompatActivity {
         btn = (Button) findViewById(R.id.button5);
         btn.setVisibility(View.GONE);
 
-
         ListView rv = (ListView) findViewById(R.id.listViewWings);
-
 
         Set<String> names = hm.keySet();
         final String[] ms = new String[names.size()];
@@ -90,7 +88,6 @@ public class ListRooms extends AppCompatActivity {
                     if (btn.getVisibility() == View.GONE) {
                         btn.setVisibility(View.VISIBLE);
                     }
-                    //Toast.makeText(ListRooms.this, ms[position], Toast.LENGTH_SHORT).show();
                     chosen.add(ms[position]);
                 } else {
                     if (btn.getVisibility() == View.VISIBLE && chosen.size() == 1) {
@@ -101,15 +98,17 @@ public class ListRooms extends AppCompatActivity {
 
             }
         });
-
-
     }
 
-
-    public void makeRoot(View view) {
+    public void makeRoute(View view) {
         List<Integer> list = new ArrayList<>();
         for (String i : chosen) {
             list.addAll(hm.get(i));
         }
+        boolean[] toVisit = new boolean[ROOMS_COUNT];
+        for (int i = 0; i < list.size(); i++) {
+            toVisit[list.get(i)] = true;
+        }
+        RoomsActivity.makeRoute(toVisit);
     }
 }

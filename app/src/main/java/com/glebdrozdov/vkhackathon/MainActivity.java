@@ -1,7 +1,6 @@
 package com.glebdrozdov.vkhackathon;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,8 +17,6 @@ import android.widget.TextView;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
 
