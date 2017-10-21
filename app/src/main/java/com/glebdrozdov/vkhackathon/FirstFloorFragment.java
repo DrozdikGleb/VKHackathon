@@ -24,6 +24,13 @@ public class FirstFloorFragment extends Fragment {
     private float xLocation;
     private float yLocation;
     private int roomNumber;
+    private PhotoView photoView;
+    private float BitmapWidth;
+    private float BitmapHeight;
+    private static float coefficientX;
+    private static float coefficientY;
+    float previousCenterX = 0;
+    float previousCenterY = 0;
 
     public int getNumber() {
         return roomNumber;
@@ -41,12 +48,17 @@ public class FirstFloorFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         RoomCoordinatesFiller roomFilter = new RoomCoordinatesFiller();
         roomFilter.fillRooms();
-        PhotoView photoView = (PhotoView) view.findViewById(R.id.first_floor_photo_view);
+        photoView = (PhotoView) view.findViewById(R.id.first_floor_photo_view);
         photoView.setImageResource(R.drawable.map_hermitage_1);
         photoView.buildDrawingCache();
-        Bitmap myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.map_hermitage_1)
+        Bitmap previousBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.map_hermitage_1)
                 .copy(Bitmap.Config.ARGB_8888, true);
-        Bitmap newBitmap = getOurRoute(myBitmap);
+        Bitmap newBitmap = getOurRoute(previousBitmap);
+        BitmapHeight = newBitmap.getHeight();
+        BitmapWidth = newBitmap.getWidth();
+        Log.i("get-","fdsfdfsdf");
+        coefficientX  = newBitmap.getWidth() / 800;
+        coefficientY = newBitmap.getHeight() / 376;
         photoView.setImageBitmap(newBitmap);
         photoView.setScale(2.5f, true);
         final TextView textView = (TextView) view.findViewById(R.id.our_data);
@@ -55,19 +67,20 @@ public class FirstFloorFragment extends Fragment {
             public void onPhotoTap(ImageView view, float x, float y) {
                 xLocation = x * 800;
                 yLocation = y * 376;
-                Log.i("location", String.valueOf(xLocation) + " " + String.valueOf(yLocation));
                 textView.setText(String.valueOf(xLocation) + " " + String.valueOf(yLocation));
-                int k = 0;
-                for (int i = 0; i < 107; i++) {
+                for (int i = 0; i < 131; i++) {
                     if (RoomCoordinatesFiller.rooms[i].top != 0) {
                         Room room = RoomCoordinatesFiller.rooms[i];
                         if ((room.left < xLocation) && (room.right > xLocation) && (room.top < yLocation) && (room.bottom > yLocation)) {
                             roomNumber = i;
+                            if (i == 0) {
+                                Toast.makeText(getActivity(), "Вы выбрали выход", Toast.LENGTH_SHORT).show();
+                                break;
+                            }
                             Toast.makeText(getActivity(), "Вы выбрали комнату " + String.valueOf(roomNumber), Toast.LENGTH_SHORT).show();
                             break;
                         }
                     } else {
-                        k++;
                     }
                 }
 
@@ -77,13 +90,34 @@ public class FirstFloorFragment extends Fragment {
     }
 
     public Bitmap getOurRoute(Bitmap previousBitmap) {
-        Canvas canvas = new Canvas(previousBitmap);
-        float heightBitmap = previousBitmap.getHeight();
-        float widthBitmap = previousBitmap.getWidth();
-        Paint paint = new Paint();
-        paint.setColor(Color.RED);
-        paint.setStrokeWidth(6);
-        canvas.drawLine(widthBitmap * 0.435f, heightBitmap * 0.52f, widthBitmap * 0.5f, heightBitmap * 0.52f, paint);
+        String route = RoomsActivity.route;
+        if (route != null) {
+            Log.i("route-", route);
+            String[] strRoute = route.split("\\s+");
+            int routeSize = strRoute.length;
+            int[] intRoute = new int[routeSize];
+            for (int i = 0; i < routeSize; i++) {
+                intRoute[i] = Integer.parseInt(strRoute[i]);
+            }
+            Canvas canvas = new Canvas(previousBitmap);
+            Paint paint = new Paint();
+            paint.setColor(Color.RED);
+            paint.setStrokeWidth(6);
+            for (int i = 0; i < routeSize; i++) {
+                if (i == 0) {
+                    Room room = RoomCoordinatesFiller.rooms[intRoute[0]];
+                    previousCenterX = room.centerX * coefficientX;
+                    previousCenterY = room.centerY * coefficientY;
+                } else {
+                    Room room = RoomCoordinatesFiller.rooms[intRoute[i]];
+                    if (room.left != 0) {
+                        canvas.drawLine(previousCenterX, previousCenterY, room.centerX * coefficientX, room.centerY * coefficientY, paint);
+                        previousCenterX = room.centerX * coefficientX;
+                        previousCenterY = room.centerY * coefficientY;
+                    }
+                }
+            }
+        }
         return previousBitmap;
     }
 }

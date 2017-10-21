@@ -1,6 +1,7 @@
 package com.glebdrozdov.vkhackathon;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -285,6 +286,9 @@ public class RoomsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 makeRoute(toVisit);
+                Intent intentToMain = new Intent(RoomsActivity.this,MainActivity.class);
+                startActivity(intentToMain);
+
                 // order - лист очередности посещения
                 // route - чистая строка очередности посещения
             }

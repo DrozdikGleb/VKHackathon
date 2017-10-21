@@ -25,9 +25,9 @@ public class RoomCoordinatesFiller {
         rooms[11] = new Room(85, 94, 50, 82);
         rooms[12] = new Room(67, 83, 50, 71);
         rooms[13] = new Room(40, 65, 50, 71);
-        rooms[14] = new Room(16, 63, 50, 71);
-        rooms[15] = new Room(16, 63, 73, 82);
-        rooms[16] = new Room(16, 63, 83, 94);
+        rooms[14] = new Room(15, 39, 50, 71);
+        rooms[15] = new Room(15, 39, 73, 82);
+        rooms[16] = new Room(15, 39, 83, 94);
         rooms[17] = new Room(40, 50, 96, 106);
         rooms[18] = new Room(52, 66, 96, 106);
         rooms[19] = new Room(52, 66, 108, 116);
@@ -118,15 +118,15 @@ public class RoomCoordinatesFiller {
         rooms[104] = new Room(0, 0, 0, 0);
         rooms[105] = new Room(0, 0, 0, 0);
         rooms[106] = new Room(0, 0, 0, 0);
-        rooms[107] = new Room(472, 506, 206, 264);
 
+        rooms[107] = new Room(472, 506, 206, 264);
         rooms[108] = new Room(467, 506, 264, 308);
         rooms[109] = new Room(506, 544, 271, 303);
         rooms[110] = new Room(545, 575, 272, 303);
         rooms[111] = new Room(576, 616, 271, 303);
 
-        rooms[112] = new Room(517, 655, 279, 306);
-        rooms[113] = new Room(517, 655, 262, 278);
+        rooms[112] = new Room(617, 655, 279, 306);
+        rooms[113] = new Room(617, 655, 262, 278);
         rooms[114] = new Room(616, 643, 206, 261);
         rooms[115] = new Room(576, 643, 189, 205);
         rooms[116] = new Room(589, 643, 171, 186);
@@ -146,7 +146,5 @@ public class RoomCoordinatesFiller {
         rooms[129] = new Room(469, 499, 153, 172);
         rooms[130] = new Room(472, 506, 95, 155);
         rooms[131] = new Room(499, 518, 69, 94);
-
-
     }
 }
