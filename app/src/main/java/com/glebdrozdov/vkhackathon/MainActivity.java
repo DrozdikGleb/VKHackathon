@@ -2,12 +2,12 @@ package com.glebdrozdov.vkhackathon;
 
 import android.app.Dialog;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,15 +33,15 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
     TextView tv;
     static Dialog d;
     String myJSON;
-    int times[] = new int [401];
-    int people[] = new int [401];
+    int times[] = new int[401];
+    int people[] = new int[401];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         floorsPageAdapter = new FloorsPageAdapter(getSupportFragmentManager());
-        tv = (TextView)findViewById(R.id.roomNumber);
+        tv = (TextView) findViewById(R.id.roomNumber);
         ViewPager viewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(viewPager);
         TabLayout floorTabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         final Dialog d = new Dialog(MainActivity.this);
         d.setTitle("NumberPicker");
         d.setContentView(R.layout.dialog);
-        d.getWindow().setLayout((6 * width)/7, (4 * height)/5);
+        d.getWindow().setLayout((6 * width) / 7, (4 * height) / 5);
         Button b1 = (Button) d.findViewById(R.id.button1);
         Button b2 = (Button) d.findViewById(R.id.button2);
         final NumberPicker np = (NumberPicker) d.findViewById(R.id.numberPicker1);

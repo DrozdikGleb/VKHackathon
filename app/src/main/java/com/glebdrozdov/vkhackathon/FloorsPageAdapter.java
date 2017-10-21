@@ -25,6 +25,7 @@ public class FloorsPageAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return fragmentList.size();
     }
+
     public void addFragment(Fragment fragment) {
         fragmentList.add(fragment);
     }
