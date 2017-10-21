@@ -9,15 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_wings_return"
-
         android:onClick="onClick"
-        android:text="Посетить всё" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_marginBottom="1dp"
+        android:text="Посетить всё" />
 
     <Button
         android:id="@+id/button3"
@@ -26,13 +21,11 @@
 
         android:background="@drawable/btn_wings_return"
         android:onClick="onClick"
+
+
+        android:layout_marginBottom="1dp"
         android:text="Выбрать категории" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
 
     <Button
         android:id="@+id/button4"

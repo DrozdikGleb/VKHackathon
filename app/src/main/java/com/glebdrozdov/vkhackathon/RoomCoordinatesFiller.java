@@ -118,5 +118,35 @@ public class RoomCoordinatesFiller {
         rooms[104] = new Room(0, 0, 0, 0);
         rooms[105] = new Room(0, 0, 0, 0);
         rooms[106] = new Room(0, 0, 0, 0);
+        rooms[107] = new Room(472, 506, 206, 264);
+
+        rooms[108] = new Room(467, 506, 264, 308);
+        rooms[109] = new Room(506, 544, 271, 303);
+        rooms[110] = new Room(545, 575, 272, 303);
+        rooms[111] = new Room(576, 616, 271, 303);
+
+        rooms[112] = new Room(517, 655, 279, 306);
+        rooms[113] = new Room(517, 655, 262, 278);
+        rooms[114] = new Room(616, 643, 206, 261);
+        rooms[115] = new Room(576, 643, 189, 205);
+        rooms[116] = new Room(589, 643, 171, 186);
+
+        rooms[117] = new Room(576, 588, 171, 186);
+        rooms[118] = new Room(0, 0, 0, 0);
+        rooms[119] = new Room(0, 0, 0, 0);
+        rooms[120] = new Room(0, 0, 0, 0);
+        rooms[121] = new Room(545, 575, 155, 186);
+        rooms[122] = new Room(0, 0, 0, 0);
+        rooms[123] = new Room(0, 0, 0, 0);
+        rooms[124] = new Room(0, 0, 0, 0);
+        rooms[125] = new Room(0, 0, 0, 0);
+        rooms[126] = new Room(0, 0, 0, 0);
+        rooms[127] = new Room(499,545, 155, 170);
+        rooms[128] = new Room(468, 499, 172, 190);
+        rooms[129] = new Room(469, 499, 153, 172);
+        rooms[130] = new Room(472, 506, 95, 155);
+        rooms[131] = new Room(499, 518, 69, 94);
+
+
     }
 }

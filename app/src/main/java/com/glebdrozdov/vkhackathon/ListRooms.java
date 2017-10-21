@@ -106,7 +106,7 @@ public class ListRooms extends AppCompatActivity {
     }
 
 
-    public void GoToSpat(View view) {
+    public void makeRoot(View view) {
         List<Integer> list = new ArrayList<>();
         for (String i : chosen) {
             list.addAll(hm.get(i));
