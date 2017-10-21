@@ -8,11 +8,15 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.github.chrisbanes.photoview.OnScaleChangedListener;
 import com.github.chrisbanes.photoview.PhotoView;
 
 
 public class FirstFloorFragment extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -22,7 +26,14 @@ public class FirstFloorFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        PhotoView photoView =(PhotoView) view.findViewById(R.id.first_floor_photo_view);
+        PhotoView photoView = (PhotoView) view.findViewById(R.id.first_floor_photo_view);
+        final TextView textView = (TextView) view.findViewById(R.id.our_data);
+        photoView.setOnScaleChangeListener(new OnScaleChangedListener() {
+            @Override
+            public void onScaleChange(float scaleFactor, float focusX, float focusY) {
+                textView.setText(String.valueOf(scaleFactor));
+            }
+        });
         /*Matrix inverse = new Matrix();
         photoView.getImageMatrix().invert(inverse);
         float[] touchPoint = new float[1000];
