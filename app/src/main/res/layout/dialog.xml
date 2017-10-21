@@ -31,6 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:text="Cancel"
+
+        android:background="@drawable/btn_wings_return"
         android:layout_marginBottom="121dp"
         android:layout_alignParentBottom="true"
         android:layout_alignEnd="@+id/numberPicker3" />
@@ -40,6 +42,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
+
+        android:background="@drawable/btn_wings_return"
         android:text="Set"
         android:layout_alignBaseline="@+id/button2"
         android:layout_alignBottom="@+id/button2"

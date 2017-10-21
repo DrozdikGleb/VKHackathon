@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_height="wrap_content"
-    >
-
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/rv"
-        >
-
-    </android.support.v7.widget.RecyclerView>
+    android:layout_height="wrap_content">
 
 
     <Button
-        android:id="@+id/button123"
+        android:id="@+id/button5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Go"
-        android:onClick="GOq"/>
+        android:background="@drawable/btn_wings_return"
+        android:onClick="GoToSpat"
+        android:text="Построить" />
+
+    <ListView
+        android:id="@+id/listViewWings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 </LinearLayout>

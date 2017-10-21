@@ -26,7 +26,7 @@ public class RouterActivity extends Activity {
                 finish();
                 break;
             case R.id.button3:
-                Intent intent3 = new Intent(RouterActivity.this, CategoryActivity.class);
+                Intent intent3 = new Intent(RouterActivity.this, ListRooms.class);
                 startActivity(intent3);
                 break;
             case R.id.button4:
