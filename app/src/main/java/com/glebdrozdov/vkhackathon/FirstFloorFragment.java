@@ -11,14 +11,12 @@ import android.view.ViewGroup;
 
 import com.github.chrisbanes.photoview.PhotoView;
 
-import java.util.zip.Inflater;
-
 
 public class FirstFloorFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.first_floor,container,false);
+        View view = inflater.inflate(R.layout.first_floor, container, false);
         return view;
     }
 
