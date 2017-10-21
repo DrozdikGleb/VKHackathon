@@ -1,6 +1,7 @@
 package com.glebdrozdov.vkhackathon;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +16,11 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class MainActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
 
     private FloorsPageAdapter floorsPageAdapter;
@@ -25,6 +31,12 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        try {
+            FileInputStream inputStream = openFileInput("coords.txt");
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         floorsPageAdapter = new FloorsPageAdapter(getSupportFragmentManager());
         tv = (TextView) findViewById(R.id.roomNumber);
         ViewPager viewPager = (ViewPager) findViewById(R.id.container);
@@ -124,4 +136,6 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
     public void onValueChange(NumberPicker numberPicker, int i, int i1) {
 
     }
+
+
 }
