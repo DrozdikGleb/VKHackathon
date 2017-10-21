@@ -1,13 +1,16 @@
 package com.glebdrozdov.vkhackathon;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 
-public class RouteActivity extends AppCompatActivity {
+/**
+ * Created by Илья on 21.10.2017.
+ */
 
+public class CategoryActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_route);
+        setContentView(R.layout.activity_category);
     }
 }
