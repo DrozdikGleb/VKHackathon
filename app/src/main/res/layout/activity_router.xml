@@ -12,7 +12,7 @@
         android:onClick="onClick"
 
         android:layout_marginBottom="1dp"
-        android:text="Посетить всё" />
+        android:text="Отобразить людей на карте" />
 
     <Button
         android:id="@+id/button3"

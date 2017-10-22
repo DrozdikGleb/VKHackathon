@@ -1,6 +1,7 @@
 package com.glebdrozdov.vkhackathon;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,8 @@ import okhttp3.Response;
 import static com.glebdrozdov.vkhackathon.Consts.ROOMS_COUNT;
 
 public class RoomsActivity extends Activity {
+
+    public static String routeToDraw;
 
     private String myJSON;
     private static int times[] = new int[ROOMS_COUNT + 1];
@@ -285,6 +288,9 @@ public class RoomsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 makeRoute(toVisit);
+                Intent intentToMain = new Intent(RoomsActivity.this, MainActivity.class);
+                startActivity(intentToMain);
+
                 // order - лист очередности посещения
                 // route - чистая строка очередности посещения
             }
@@ -316,6 +322,7 @@ public class RoomsActivity extends Activity {
             route += String.format(" %d", order.get(i));
         }
         order = new ArrayList<>();
+        routeToDraw = route;
         return route;
     }
 
