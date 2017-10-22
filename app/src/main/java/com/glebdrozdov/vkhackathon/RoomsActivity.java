@@ -122,7 +122,7 @@ public class RoomsActivity extends Activity {
         }
     }
 
-    final String[] roomNames = new String[ROOMS_COUNT];
+    final String[] roomNames = new String[ROOMS_COUNT - 109];
     boolean[] toVisit = new boolean[ROOMS_COUNT];
     final HashMap<String, List<Integer>> hm = new HashMap<>();
 
@@ -335,9 +335,6 @@ public class RoomsActivity extends Activity {
                 roomNames[index] = key + " " + String.valueOf(value.get(i));
                 index++;
             }
-        }
-        for (int i = index; i < ROOMS_COUNT; i++) {
-            roomNames[i] = "Несуществующий зал";
         }
     }
 
