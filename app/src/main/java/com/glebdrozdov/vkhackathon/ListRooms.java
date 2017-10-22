@@ -107,8 +107,8 @@ public class ListRooms extends AppCompatActivity {
         }
         boolean[] toVisit = new boolean[ROOMS_COUNT];
         for (int i = 0; i < list.size(); i++) {
-            toVisit[list.get(i)] = true;
+            toVisit[list.get(i) - 1] = true;
         }
-        RoomsActivity.makeRoute(toVisit);
+        String s = RoomsActivity.makeRoute(toVisit);
     }
 }

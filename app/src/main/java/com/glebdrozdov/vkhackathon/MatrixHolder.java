@@ -239,8 +239,8 @@ public class MatrixHolder {
         matrix[221] = Arrays.asList(220, 222);
         matrix[222] = Arrays.asList(221, 223);
         matrix[223] = Arrays.asList(222, 224);
-        matrix[224] = Arrays.asList(223, 216, 229, 227);
-        matrix[225] = new ArrayList<>();
+        matrix[224] = Arrays.asList(223, 216, 225, 229, 227);
+        matrix[225] = Arrays.asList(224);
         matrix[226] = new ArrayList<>();
         matrix[227] = Arrays.asList(224, 229, 228, 237);
         matrix[228] = Arrays.asList(227);
