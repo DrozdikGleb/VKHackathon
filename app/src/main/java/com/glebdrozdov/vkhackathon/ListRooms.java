@@ -1,5 +1,6 @@
 package com.glebdrozdov.vkhackathon;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -109,6 +110,8 @@ public class ListRooms extends AppCompatActivity {
         for (int i = 0; i < list.size(); i++) {
             toVisit[list.get(i) - 1] = true;
         }
-        String s = RoomsActivity.makeRoute(toVisit);
+        RoomsActivity.makeRoute(toVisit);
+        Intent CategoryToMain = new Intent(ListRooms.this, MainActivity.class);
+        startActivity(CategoryToMain);
     }
 }

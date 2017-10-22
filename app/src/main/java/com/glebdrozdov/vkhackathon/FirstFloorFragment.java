@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.chrisbanes.photoview.OnPhotoTapListener;
@@ -56,18 +55,15 @@ public class FirstFloorFragment extends Fragment {
         Bitmap newBitmap = getOurRoute(previousBitmap);
         BitmapHeight = newBitmap.getHeight();
         BitmapWidth = newBitmap.getWidth();
-        Log.i("get-","fdsfdfsdf");
-        coefficientX  = newBitmap.getWidth() / 800;
+        coefficientX = newBitmap.getWidth() / 800;
         coefficientY = newBitmap.getHeight() / 376;
         photoView.setImageBitmap(newBitmap);
         photoView.setScale(2.5f, true);
-        final TextView textView = (TextView) view.findViewById(R.id.our_data);
         photoView.setOnPhotoTapListener(new OnPhotoTapListener() {
             @Override
             public void onPhotoTap(ImageView view, float x, float y) {
                 xLocation = x * 800;
                 yLocation = y * 376;
-                textView.setText(String.valueOf(xLocation) + " " + String.valueOf(yLocation));
                 for (int i = 0; i < 131; i++) {
                     if (RoomCoordinatesFiller.rooms[i].top != 0) {
                         Room room = RoomCoordinatesFiller.rooms[i];
@@ -90,9 +86,8 @@ public class FirstFloorFragment extends Fragment {
     }
 
     public Bitmap getOurRoute(Bitmap previousBitmap) {
-        String route = RoomsActivity.route;
+        String route = RoomsActivity.routeToDraw;
         if (route != null) {
-            Log.i("route-", route);
             String[] strRoute = route.split("\\s+");
             int routeSize = strRoute.length;
             int[] intRoute = new int[routeSize];

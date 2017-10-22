@@ -9,6 +9,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,10 +19,13 @@ import android.widget.TextView;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import static com.glebdrozdov.vkhackathon.Consts.ROOMS_COUNT;
+
 public class MainActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
 
     private FloorsPageAdapter floorsPageAdapter;
     TextView tv;
+    static int currentToExitRoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
             e.printStackTrace();
         }
         floorsPageAdapter = new FloorsPageAdapter(getSupportFragmentManager());
-        tv = (TextView) findViewById(R.id.roomNumber);
         ViewPager viewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(viewPager);
         TabLayout floorTabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -84,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         final NumberPicker np2 = (NumberPicker) d.findViewById(R.id.numberPicker2);
         final NumberPicker np3 = (NumberPicker) d.findViewById(R.id.numberPicker3);
         Button b1 = (Button) d.findViewById(R.id.button1);
-        Button b2 = (Button) d.findViewById(R.id.button2);
         np1.setMaxValue(4);
         np1.setMinValue(0);
         np1.setWrapSelectorWheel(false);
@@ -114,14 +116,14 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String room = String.valueOf(np1.getValue()) + String.valueOf(np2.getValue()) + String.valueOf(np3.getValue());
-                tv.setText(room);
-                d.dismiss();
-            }
-        });
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                int room = parseIntPicker(np1.getValue(), np2.getValue(), np3.getValue());
+                currentToExitRoom = room;
+                Log.i("room-",String.valueOf(currentToExitRoom));
+                boolean[] toVisit = new boolean[ROOMS_COUNT];
+                toVisit[currentToExitRoom - 1] = true;
+                RoomsActivity.makeRoute(toVisit);
+                Intent CategoryToMain = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(CategoryToMain);
                 d.dismiss();
             }
         });
@@ -130,6 +132,22 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
 
     @Override
     public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+
+    }
+
+    public int parseIntPicker(int picker1, int picker2, int picker3) {
+        int hundred = 0;
+        int tens = 0;
+        if (picker1 != 0) {
+            hundred = picker1;
+        }
+        if (picker2 != 0) {
+            tens = picker2;
+        }
+        int myValue = hundred * 100 + tens * 10 + picker3;
+
+        return myValue;
+
 
     }
 

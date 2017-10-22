@@ -26,39 +26,24 @@
         android:layout_toEndOf="@+id/numberPicker2" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:text="Cancel"
-
-        android:background="@drawable/btn_wings_return"
-        android:layout_marginBottom="121dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/numberPicker3" />
-
-    <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
-
         android:background="@drawable/btn_go"
-        android:text="Set"
-        android:layout_alignBaseline="@+id/button2"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_alignStart="@+id/numberPicker1" />
-
-    <Button
-        android:id="@+id/buttonWayToExit"
-
-        android:background="@drawable/btn_exit"
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
-        android:layout_marginLeft="10dp"
-        android:drawableStart="@drawable/ic_exitroute"
+        android:text="Построить путь"
         android:layout_alignParentBottom="true"
-        android:text="Exit"
-        android:layout_alignEnd="@+id/numberPicker3" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="132dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:text="В каком вы зале?"
+        android:textStyle="bold" />
 
 </RelativeLayout>

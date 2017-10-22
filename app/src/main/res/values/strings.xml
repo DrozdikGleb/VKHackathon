@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">VKHackathon</string>
-    <string name="whatroute">Как пройти?</string>
+    <string name="whatroute">Где выход?</string>
     <string name="want_to_visit">Хочу посетить</string>
 </resources>
