@@ -2,37 +2,96 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/fon"
     android:orientation="vertical">
-
-    <Button
-        android:id="@+id/button"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_wings_return"
-        android:onClick="onClick"
-
-        android:layout_marginBottom="1dp"
-        android:text="Отобразить людей на карте" />
-
-    <Button
-        android:id="@+id/button3"
+        app:cardElevation="5dp"
+        android:id="@+id/cv1"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="1dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/showPeople"
+                android:text="Загруженность залов"
+                android:layout_alignParentTop="true"
+                android:textSize="30sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/description1"
+                android:text="Показать расположение людей на карте"
+                android:layout_below="@+id/showPeople"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:background="@drawable/btn_wings_return"
-        android:onClick="onClick"
-
-
-        android:layout_marginBottom="1dp"
-        android:text="Выбрать категории" />
-
-
-    <Button
-        android:id="@+id/button4"
+        android:id="@+id/cv2"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="16dp"
+            android:layout_marginBottom="1dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/showCategory"
+                android:layout_alignParentTop="true"
+                android:text="Выбрать категории"
+                android:textSize="30sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/description2"
+                android:text="Построение оптимального маршрута по заданным категориям экспонатов"
+                android:layout_below="@+id/showCategory"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_wings_return"
-        android:onClick="onClick"
-        android:text="Выбрать залы" />
+        android:id="@+id/cv3"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="1dp"
+            android:padding="16dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/showRooms"
+                android:text="Выбрать залы"
+                android:layout_alignParentTop="true"
+                android:textSize="30sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/description3"
+                android:text="Построение оптимального маршрута на основе выбранных вами залов"
+                android:layout_below="@+id/showRooms"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
 </LinearLayout>

@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RouterActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".RouterActivity" android:screenOrientation="portrait" android:label="Построение маршрутов"></activity>
         <activity android:name=".RoomsActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".ListRooms" android:screenOrientation="portrait"></activity>
     </application>
